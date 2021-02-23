@@ -1,5 +1,5 @@
 
-var customModule=require('../Task1/modules/crudFunctions.js');
+var customModule=require('./modules/crudFunctions.js');
  var fs = require("fs");
  var users=[];
 fs.readFile("user.txt",(err,data)=>{

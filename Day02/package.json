@@ -1,0 +1,16 @@
+{
+  "name": "firstpackage",
+  "version": "1.0.0",
+  "description": "this is first package to used nodemon and express module",
+  "main": "home.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asmaa Khaled",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "query-string": "^6.14.0"
+  }
+}
