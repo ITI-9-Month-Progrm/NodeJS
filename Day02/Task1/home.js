@@ -1,12 +1,17 @@
 var express = require("express");
-var app = express();
+var morgan = require("morgan");
 var path = require("path");
 var queryString = require('query-string');
 var fs = require("fs");
 var customModule = require("./modules/custome_module");
+
 const { join } = require("path");
 var users = [];
-
+var app = express();
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+// setup the logger
+app.use(morgan('common', { stream: accessLogStream }))
 fs.readFile("users.txt",(error,data)=>{
     if(error){
         
@@ -30,14 +35,24 @@ fs.readFile("users.txt",(error,data)=>{
         });
         //Change background Color
         app.get('/background',(request,response)=>{
-            response.sendFile(path.join(__dirname,"home.html"));
+            response.sendFile(path.join(__dirname,'public','html',"home.html"));
           
         });
         //Display Image
         app.get('/imageUser',(request,response)=>{
-            response.sendFile(path.join(__dirname,"profilePic.png"));
+            response.sendFile(path.join(__dirname,'public','image',"profilePic.png"));
           
         });
+          //Display Image
+          app.get('/Logs',(request,response)=>{
+            fs.readFile('access.log', function(err, data) {
+                response.writeHead(200, {'Content-Type': 'text/plane'});
+                response.write(data);
+                response.end();
+              });
+          
+        });
+       
     }
 });
 
